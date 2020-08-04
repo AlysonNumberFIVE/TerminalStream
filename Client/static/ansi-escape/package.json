@@ -1,0 +1,59 @@
+{
+  "_from": "ansi-escape",
+  "_id": "ansi-escape@1.1.0",
+  "_inBundle": false,
+  "_integrity": "sha1-ithZ6Epp4P+Rd5aUeTqS5OjAXpk=",
+  "_location": "/ansi-escape",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "ansi-escape",
+    "name": "ansi-escape",
+    "escapedName": "ansi-escape",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/ansi-escape/-/ansi-escape-1.1.0.tgz",
+  "_shasum": "8ad859e84a69e0ff91779694793a92e4e8c05e99",
+  "_spec": "ansi-escape",
+  "_where": "/Users/alysonngonyama/SundayProject/stream/python_app/evening-spire-31376",
+  "author": {
+    "name": "zoubin"
+  },
+  "bugs": {
+    "url": "https://github.com/zoubin/ansi-escape/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {},
+  "deprecated": false,
+  "description": "ANSI escape codes for manipulating the terminal",
+  "devDependencies": {
+    "eslint": "^1.10.1",
+    "tap": "^5.0.0"
+  },
+  "homepage": "https://github.com/zoubin/ansi-escape#readme",
+  "keywords": [
+    "ansi",
+    "escape",
+    "terminal"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "ansi-escape",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zoubin/ansi-escape.git"
+  },
+  "scripts": {
+    "coveralls": "COVERALLS_REPO_TOKEN=REPO_TOKEN npm test",
+    "lint": "eslint *.js lib/*.js test/*.js bin/*.js",
+    "test": "npm run lint && tap test/*.js"
+  },
+  "version": "1.1.0"
+}
