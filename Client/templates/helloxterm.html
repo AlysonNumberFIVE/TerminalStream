@@ -5,7 +5,6 @@
 	<script src="{{ url_for('static', filename='xterm/lib/xterm.js') }}"></script>
 	<!--script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="{{ url_for('static', filename='ansi-escape/index.js') }}"></script>
 	 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
 </head>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/xterm/3.14.5/xterm.min.js"></script>
@@ -14,7 +13,9 @@
 	</title>
 </head>
 <body>
-	<div id="terminal"></div>
+	<div class="container">
+		<div id="terminal"></div>
+	</div>
 	<script>
 		var response = "";
 		var history = 0;
@@ -63,21 +64,17 @@
 			});
 		
 		}
+	
 
 		var term = new Terminal({
 			cursorBlink: "block"
 		});
-	//	const ws = new WebSocket("ws://196.22.252.174", "echo-protocol");
+
 		var curr_line = ""
 		var entries = []
 		term.open(document.getElementById("terminal"));
+	
 		term.write("web shell $ ");
-		/*
-		term.on("key", function(key, ev) {
-			curr_line += key;
-			term.write(key);
-		});*/ 
-
 		term.prompt = () => {
 			if (curr_line) {
 				let data = {method: "command", command: curr_line};
@@ -85,16 +82,11 @@
 			}
 		};
 		term.prompt();
-	/*	ws.onmessage = msg => {
-			term.write("\r\n" + JSON.parse(msg.data).data);
-			curr_line = "";
-		}*/
 		term.on("key", function(key, ev) {
 			console.log('ev.keyCode ', ev.keyCode);
 			if (ev.keyCode == 13) {
 				entries.push(curr_line);
 				shell_control(curr_line, term);
-				//term.write("\r\nweb shell $ ");
 				curr_line = ""
 				response = "";
 				term.prompt();
