@@ -93,6 +93,19 @@ void     sending_number_size(int sockfd, size_t size)
     recv(sockfd, buffer, 6, 0);
 }
 
+t_goldilox  *close_connection(t_goldilox *block, int sockfd)
+{
+    free(block->content);
+    free(block);
+    close(sockfd);
+    return (NULL);
+}
+
+void        Close(int sockfd)
+{
+    StableSend(sockfd, (unsigned char *)"RUSSIANGUILOTINE\0", 17);
+    close(sockfd);
+}
 
 t_goldilox   *StableRecv(int sockfd)
 {
@@ -102,9 +115,12 @@ t_goldilox   *StableRecv(int sockfd)
 
     goldiblock = (t_goldilox *)malloc(sizeof(t_goldilox));
     goldiblock->size = receive_number_size(sockfd);
-
+   
     goldiblock->content = buffered_recv(sockfd, goldiblock->size);
   //  write(1, goldiblock->content, goldiblock->size);
+    if (strncmp((char *)goldiblock->content, (char *)"RUSSIANGUILOUTINE\0", 19) == 0)
+        return (close_connection(goldiblock, sockfd));
+
     if (assert_buffer_is_file(goldiblock->content, goldiblock->size)
           == true)
     {

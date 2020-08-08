@@ -26,5 +26,9 @@ clean:
 	make clean -C $(network)
 	make clean -C $(shell)
 	
+fclean:
+	make fclean -C $(network)
+	make fclean -C $(shell)
+	rm -f server
 
-
+re: fclean all

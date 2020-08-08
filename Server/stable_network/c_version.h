@@ -27,5 +27,6 @@ int     InitServer(int port, int listen_queue_length,
 int     GoldiloxAPIClientConnection(char *host, int port);
 bool    assert_api_connection(int sockfd);
 int     HandshakeAccept(int sockfd, struct sockaddr_in server_addr);
+void    Close(int sockfd);
 
 #endif

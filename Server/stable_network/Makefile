@@ -39,3 +39,4 @@ fclean:
 	rm -f $(obj)
 	rm -f network.a
 
+re: fclean all
