@@ -1,0 +1,12 @@
+{
+	"url": "127.0.0.1",
+	"author": "AlysonBee",
+	"Bigquery Schema Autogen": {
+	    "link": "https://github.com/AlysonBee/Python_BigQuery_Schema_Autogen",
+	    "port": 4242
+	},
+	"OSX Packer": {
+	    "link": "https://github.com/AlysonBee/OSX_Packer",
+	    "port": 5555
+	}
+}

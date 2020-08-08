@@ -47,7 +47,7 @@ class GoldiloxAPIClientConnection():
             print('Error connecting to valid daemon. Closing connection')
             self.sockfd.close()
             sys.exit(1)
-        signal.signal(signal.SIGINT, self.signal_catcher)
+#        signal.signal(signal.SIGINT, self.signal_catcher)
 
 
     def Send(self, buffer: bytearray) -> None:
@@ -93,6 +93,14 @@ class GoldiloxAPIClientConnection():
             self.RecvFile(content)
         else:
             return content
+
+
+    def Close(self) -> None:
+        """Close the connection."""
+        print('Terminating connection...')
+        self.Send('RUSSIANGUILOUTINE')
+        self.sockfd.close()
+        sys.exit(1)
 
 
     def sending_number_size(self, size: int) -> None:

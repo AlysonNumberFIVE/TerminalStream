@@ -51,9 +51,6 @@
 					if (buffer["value"].length > 0)
 					{
 						response = buffer["value"].replace(/\u21B5/g,'\n');
-						console.log('response is ',response);
-				//		term.write("\r\n"+response);
-
 						print_output(response, term);
 					}
 					term.write("\r\nweb shell $ ");
@@ -83,10 +80,15 @@
 		};
 		term.prompt();
 		term.on("key", function(key, ev) {
-			console.log('ev.keyCode ', ev.keyCode);
+			
 			if (ev.keyCode == 13) {
-				entries.push(curr_line);
-				shell_control(curr_line, term);
+				if (curr_line.length > 1)
+				{
+					entries.push(curr_line);
+					shell_control(curr_line, term);
+				}
+				else 
+					term.write('\r\nweb shell $ ');
 				curr_line = ""
 				response = "";
 				term.prompt();
