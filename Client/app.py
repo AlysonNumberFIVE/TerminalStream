@@ -159,7 +159,6 @@ def delete_all():
 		db.session.commit()
 	print("deleted")
 
-delete_all()
 
 if __name__ == '__main__':
 	app.run()
