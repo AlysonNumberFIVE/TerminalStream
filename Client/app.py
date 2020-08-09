@@ -54,9 +54,6 @@ def new():
 	return jsonify({'value': ret})
 
 
-@app.route('/testing')
-def message_board():
-	return render_template('shell_review.html')
 
 
 def handle_config(content: str):
@@ -135,6 +132,14 @@ def test():
 
 	return render_template('msgboard.html',
 							projects=all_projects)
+
+
+def delete_all():
+	allprojects = Project.query.all()
+	for project in allprojects:
+		db.session.delete(project)
+		db.session.commit()
+	print("deleted")
 
 
 if __name__ == '__main__':

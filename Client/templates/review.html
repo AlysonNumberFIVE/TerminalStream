@@ -206,55 +206,12 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>Bootstrap Sidebar</h3>
+                <h3>Nameless Project</h3>
             </div>
             <img src="/static/panda-ninja.png" />
             <ul class="list-unstyled components">
-                <p>Alyson Ngonyama</p>
-                <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Challenges</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a href="#">Root-Me</a>
-                        </li>
-                        <li>
-                            <a href="#">OverTheWire</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">Github</a>
-                </li>
-                <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Live Projects</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li>
-                            <a href="#">URL Security Scanner</a>
-                        </li>
-                        <li>
-                            <a href="#">Python BigQuery Schema Autogen</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 3</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">Portfolio</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-            </ul>
-
-            <ul class="list-unstyled CTAs">
-                <li>
-                    <a href="#" class="download">Message</a>
-                </li>
-                <li>
-                    <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Request Help</a>
-                </li>
-            </ul>
+                <p>Coded by AlysonBee</p>
+       
         </nav>
 
         <!-- Page Content  -->
@@ -271,30 +228,21 @@
                         <i class="fas fa-align-justify"></i>
                     </button>
 
+
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
+                                <a class="nav-link" href="{{ url_for('test') }}">Message Board</a>
                             </li>
                         </ul>
                     </div>
-                </div>
             </nav>
             <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='asciinema-player.css') }}" />
  
             <div class="container">
                 <h3>{{ project.name }}</h3>
                 <p>Converts a JSON string to a basic BigQuery Python Schema.</p>
-                <a href="#" class="btn btn-link">{{ project.github_link }}</a>
+                <a href="{{ project.github_link }}"  target="_blank class="btn btn-link">{{ project.github_link }}</a>
                 <p>Preview:</p><br>
                              
                 <div class="iframe-loading-image">

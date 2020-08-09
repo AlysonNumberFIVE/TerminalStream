@@ -100,7 +100,7 @@ class GoldiloxAPIClientConnection():
         print('Terminating connection...')
         self.Send('RUSSIANGUILOUTINE')
         self.sockfd.close()
-        sys.exit(1)
+#        sys.exit(1)
 
 
     def sending_number_size(self, size: int) -> None:

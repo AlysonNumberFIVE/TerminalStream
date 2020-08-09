@@ -202,55 +202,12 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>User Profile</h3>
+                <h3>Nameless Project</h3>
             </div>
-            <img src="{{ url_for('static', filename='panda-ninja.png')}}" />
+            <img src="/static/panda-ninja.png" />
             <ul class="list-unstyled components">
-                <p>Alyson Ngonyama</p>
-                <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Challenges</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a href="#">Root-Me</a>
-                        </li>
-                        <li>
-                            <a href="#">OverTheWire</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">Github</a>
-                </li>
-                <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Live Projects</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li>
-                            <a href="#">URL Security Scanner</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 3</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">Portfolio</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-            </ul>
-
-            <ul class="list-unstyled CTAs">
-                <li>
-                    <a href="#" class="download">Message</a>
-                </li>
-                <li>
-                    <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Request Help</a>
-                </li>
-            </ul>
+                <p>Coded by AlysonBee</p>
+       
         </nav>
 
         <!-- Page Content  -->
@@ -270,7 +227,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="#">Message Board</a>
+                                <a class="nav-link" href="{{ url_for('test') }}">Message Board</a>
                             </li>
                         </ul>
                     </div>
