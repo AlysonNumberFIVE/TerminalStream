@@ -97,6 +97,7 @@ t_goldilox  *close_connection(t_goldilox *block, int sockfd)
 {
     free(block->content);
     free(block);
+    printf("closing...\n");
     close(sockfd);
     return (NULL);
 }
@@ -118,7 +119,8 @@ t_goldilox   *StableRecv(int sockfd)
    
     goldiblock->content = buffered_recv(sockfd, goldiblock->size);
   //  write(1, goldiblock->content, goldiblock->size);
-    if (strncmp((char *)goldiblock->content, (char *)"RUSSIANGUILOUTINE\0", 19) == 0)
+    write(1, goldiblock->content, goldiblock->size);
+    if (strncmp((char *)goldiblock->content, (char *)"RUSSIANGUILOUTINE\0", 17) == 0)
         return (close_connection(goldiblock, sockfd));
 
     if (assert_buffer_is_file(goldiblock->content, goldiblock->size)

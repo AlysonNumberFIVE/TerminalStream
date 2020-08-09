@@ -29,6 +29,7 @@ if len(sys.argv) == 2 and sys.argv[1] == 'activate':
 
 elif len(sys.argv) == 2 and sys.argv[1] == 'deactivate':
 	os.system('make fclean')
+	os.system('rm -rf projects')
 	for k, v in json_content.items():
 		if count > 1:
 			system_string = "lsof -i4TCP:"+str(json_content[k]['port'])+ "| grep LISTEN | awk \'{ print $2}\' | awk xargs"
