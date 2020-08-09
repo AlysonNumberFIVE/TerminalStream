@@ -85,11 +85,6 @@ void			Satanize(void)
 	sid = setsid();
 	if (sid < 0)
 		exit(EXIT_FAILURE);
-//	if ((chdir("/")) < 0) 		// Jump to root on target system
-//		exit(EXIT_FAILURE);
-//	close(STDIN_FILENO);
-//	close(STDOUT_FILENO);
-//	close(STDERR_FILENO);
 }
 
 
@@ -130,8 +125,6 @@ int     main(int argc, char **argv)
     {
         pid_t sid;
         asock = HandshakeAccept(servfd, server_address);
-        printf("client connected\n");
-        printf("forking...\n");
         accept_fork(asock);
     }
     return (0);
