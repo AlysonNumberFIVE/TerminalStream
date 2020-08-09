@@ -4,7 +4,8 @@ Using a remote shell to demo termimnal app Github projects for those interested 
 The shell used in the browser makes use of the XTermJS library while the remote shell that hosts the terminal project is a rework of my old 42 Minishell project
 
 ## Getting Start Locally
-Before initializing the local servers for each of your projects, you'll have to configure the `config.json` file with your projects specs in the following JSON format
+Navigate to `Server/`
+Before initializing the local servers for each of your projects, you'll have to configure the `config.json` file with your projects specs in the following JSON format 
 ```
 {
 	"url": "127.0.0.1", # The address of the webserver that users will be able to visit to try your stuff
@@ -29,6 +30,7 @@ python3 init.py activate
 And that's it for a local setup.
 
 ## The Webserver
+Navigate to `Client/`
 All you have to do is ensure that the webserver is running at the same url as the one specified in your `url` variable in your config file, then simply run
 ```
 python3 app.py
