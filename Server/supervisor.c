@@ -71,38 +71,53 @@ void    accept_fork(int socket)
     }
 }
 
-int     main(void)
+void			Satanize(void) 
+{
+	pid_t	pid; 
+	pid_t	sid;
+
+	pid = fork();
+	if (pid < 0) 
+		exit(EXIT_FAILURE);
+	if (pid > 0)
+		exit(EXIT_SUCCESS);
+	umask(0);
+	sid = setsid();
+	if (sid < 0)
+		exit(EXIT_FAILURE);
+//	if ((chdir("/")) < 0) 		// Jump to root on target system
+//		exit(EXIT_FAILURE);
+//	close(STDIN_FILENO);
+//	close(STDOUT_FILENO);
+//	close(STDERR_FILENO);
+}
+
+
+int     main(int argc, char **argv)
 {
     int                 servfd;
     struct sockaddr_in  server_address;
     int                  asock;
     pid_t                pid;
 
-    servfd = InitServer(4242, 5, &server_address);
+    if (argc != 2)
+    {
+        printf("Usage : %s [port number]\n", argv[0]);
+        return (1);
+    }
+    Satanize();
+    servfd = InitServer(atoi(argv[1]), 5, &server_address);
     while (true)
     {
+        pid_t sid;
         asock = HandshakeAccept(servfd, server_address);
-        if ((pid = fork()) == 0)
-        {
+//        if ((pid = fork()) == 0)
+//        {
             printf("client connected\n");
             printf("forking...\n");
             accept_fork(asock);
-        }
+//        }
     }
     return (0);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
