@@ -36,10 +36,17 @@ python3 app.py
 And visit the URL.
 <img src="Client/screenshots/setupscreen.png" />
 
-On your first ever visit (with a clean database ofcourse) you'll be greeted with this page.
+On your first ever visit (with a clean database of course) you'll be greeted with this page.
 All you need to do is upload the same `config.json` file you created in the previous step and that's it. Your projects will appear as a list on the next page.
+<img src="Client/screenshots/ilsting.png"/>
+Click on "View" project and try it out.
 
+## Next Steps
+- The shell hosted locally is completely insecure and needs to be extensively customized to prevent users from having remote access to your entire filesystem. This is just a demo.
+- The website needs a lot of work (a looooooot of work). It's recycled from an old version but this functionality is relatively okay.
+- I think that's about it. Cheers
 
+### AlysonBee
 
 
 
