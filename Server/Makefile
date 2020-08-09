@@ -31,4 +31,4 @@ fclean:
 	make fclean -C $(shell)
 	rm -f server
 
-re: fclean all
+re: fclean server

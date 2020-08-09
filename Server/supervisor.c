@@ -93,6 +93,24 @@ void			Satanize(void)
 }
 
 
+void    switch_directory(char *project_name)
+{\
+    char    dirpath[1024];
+    char    *pathway;
+    char    *temp;
+
+    bzero(dirpath, 1024);
+    getcwd(dirpath, 1024);
+    temp = join(dirpath, "/");
+    pathway = join(temp, "projects/");
+    free(temp);
+    temp = join(pathway, project_name);
+    free(pathway);
+    chdir(temp);
+    printf(": %s\n", temp);
+    free(temp);
+}
+
 int     main(int argc, char **argv)
 {
     int                 servfd;
@@ -100,11 +118,12 @@ int     main(int argc, char **argv)
     int                  asock;
     pid_t                pid;
 
-    if (argc != 2)
+    if (argc != 3)
     {
-        printf("Usage : %s [port number]\n", argv[0]);
+        printf("Usage : %s [port number] [project name]\n", argv[0]);
         return (1);
     }
+    switch_directory(argv[2]);
     Satanize();
     servfd = InitServer(atoi(argv[1]), 5, &server_address);
     while (true)
