@@ -4,7 +4,8 @@ Using a remote shell to demo termimnal app Github projects for those interested 
 The shell used in the browser makes use of the XTermJS library while the remote shell that hosts the terminal project is a rework of my old 42 Minishell project
 
 ## Getting Start Locally
-Before initializing the local servers for each of your projects, you'll have to configure the `config.json` file with your projects specs in the following JSON format
+Navigate to `Server/`.
+Before initializing the local servers for each of your projects, you'll have to configure the `config.json` file with your projects specs in the following JSON format 
 ```
 {
 	"url": "127.0.0.1", # The address of the webserver that users will be able to visit to try your stuff
@@ -28,7 +29,8 @@ python3 init.py activate
 ```
 And that's it for a local setup.
 
-##The Webserver
+## The Webserver
+Navigate to `Client/`.
 All you have to do is ensure that the webserver is running at the same url as the one specified in your `url` variable in your config file, then simply run
 ```
 python3 app.py
@@ -36,10 +38,24 @@ python3 app.py
 And visit the URL.
 <img src="Client/screenshots/setupscreen.png" />
 
-On your first ever visit (with a clean database ofcourse) you'll be greeted with this page.
+On your first ever visit (with a clean database of course) you'll be greeted with this page.
 All you need to do is upload the same `config.json` file you created in the previous step and that's it. Your projects will appear as a list on the next page.
+<img src="Client/screenshots/ilsting.png"/>
+Click on "View" project and try it out.
 
+## When you're finsihed
+Don't forget to run 
+```
+python3 init.py deactivate
+```
+on your local machine. This will kill the daemon processes showing off your project. Coz open ports is bad hygene and we must always always always wash our hands after handshakes :).
 
+## Next Steps
+- The shell hosted locally is completely insecure and needs to be extensively customized to prevent users from having remote access to your entire filesystem. This is just a demo.
+- The website needs a lot of work (a looooooot of work). It's recycled from an old version but this functionality is relatively okay.
+- I think that's about it. Cheers
+
+### AlysonBee
 
 
 
