@@ -45,7 +45,6 @@ def is_connected():
 		APIsocket = None
 
 
-
 @app.route('/check', methods=['GET', 'POST'])
 def new():
 	values = request.get_data().decode('utf-8').split('=')
@@ -95,6 +94,13 @@ def upload():
 
 @app.route('/setup')
 def setup():
+	is_connected()
+	allprojects = Project.query.all()
+
+	if len(allprojects):
+		for project in allprojects:
+			db.session.delete(project)
+			db.session.commit()
 	return render_template('setup.html')	
 
 
@@ -121,6 +127,7 @@ def tryitout(project_name: str):
 
 @app.route('/', methods=['GET', 'POST'])
 def test():
+	is_connected()
 	all_projects = Project.query.all()
 
 	if len(all_projects) == 0:
