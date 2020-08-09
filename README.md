@@ -34,7 +34,10 @@ All you have to do is ensure that the webserver is running at the same url as th
 python3 app.py
 ```
 And visit the URL.
+<img src="Client/screenshots/setupscreen.png" />
 
+On your first ever visit (with a clean database ofcourse) you'll be greeted with this page.
+All you need to do is upload the same `config.json` file you created in the previous step and that's it. Your projects will appear as a list on the next page.
 
 
 
