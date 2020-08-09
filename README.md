@@ -28,7 +28,7 @@ python3 init.py activate
 ```
 And that's it for a local setup.
 
-##The Webserver
+## The Webserver
 All you have to do is ensure that the webserver is running at the same url as the one specified in your `url` variable in your config file, then simply run
 ```
 python3 app.py
@@ -40,6 +40,13 @@ On your first ever visit (with a clean database of course) you'll be greeted wit
 All you need to do is upload the same `config.json` file you created in the previous step and that's it. Your projects will appear as a list on the next page.
 <img src="Client/screenshots/ilsting.png"/>
 Click on "View" project and try it out.
+
+## When you're finsihed
+Don't forget to run 
+```
+python3 init.py deactivate
+```
+on your local machine. This will kill the daemon processes showing off your project. Coz open ports is bad hygene and we must always always always wash our hands after handshakes :).
 
 ## Next Steps
 - The shell hosted locally is completely insecure and needs to be extensively customized to prevent users from having remote access to your entire filesystem. This is just a demo.
