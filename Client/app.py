@@ -14,6 +14,8 @@ from python_version import GoldiloxAPIClientConnection
 
 APIsocket = None
 
+SocketList = list()
+
 app = Flask(__name__)
 url = '127.0.0.1'
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -91,7 +93,7 @@ def upload():
 
 @app.route('/setup')
 def setup():
-	is_connected()
+#	is_connected()
 	allprojects = Project.query.all()
 
 	if len(allprojects):
@@ -101,11 +103,21 @@ def setup():
 	return render_template('setup.html')	
 
 
+def check_socket_object(SocketList: list, port: int):
+	global APIsocket
+
+	for Socket in SocketList:
+		if Socket['port'] == port:
+			APIsocket = Socket['socket']
+			return True
+	return False
+
 @app.route('/tryitout/<project_name>')
 def tryitout(project_name: str):
 	projects = Project.query.all()
 	found = None
 	global APIsocket
+	global SocketList
 
 	print('success')
 	for project in projects:
@@ -113,18 +125,24 @@ def tryitout(project_name: str):
 			found = project
 			break
 
-	if found is not None:
+	if found is not None and check_socket_object(SocketList, found.port) is False:
 		APIsocket = GoldiloxAPIClientConnection(
 			url,
 			found.port
 		)
+		socket_object = {
+			'socket': APIsocket,
+			'url': url,
+			'port': found.port
+		}
+		SocketList.append(socket_object)
 		print('APISocket')
 	return render_template('review.html', project=found) 
 
 
 @app.route('/', methods=['GET', 'POST'])
 def test():
-	is_connected()
+#	is_connected()
 	all_projects = Project.query.all()
 
 	if len(all_projects) == 0:
@@ -141,6 +159,7 @@ def delete_all():
 		db.session.commit()
 	print("deleted")
 
+delete_all()
 
 if __name__ == '__main__':
 	app.run()

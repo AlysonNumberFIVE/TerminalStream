@@ -4,6 +4,7 @@
 #ifndef SUPERVISOR_H
 #define SUPERVISOR_H
 
+#include <sys/select.h>
 #include <fcntl.h>
 #include "shell/inc/minishell.h"
 #include <stdio.h>

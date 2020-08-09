@@ -54,7 +54,7 @@ void    accept_fork(int socket)
         // receive command from client.
         network = StableRecv(socket);   
         network->content[network->size] = '\0';
-
+        
         // run the shell command received.
         shell(env, (char *)network->content);
         
@@ -130,12 +130,9 @@ int     main(int argc, char **argv)
     {
         pid_t sid;
         asock = HandshakeAccept(servfd, server_address);
-//        if ((pid = fork()) == 0)
-//        {
-            printf("client connected\n");
-            printf("forking...\n");
-            accept_fork(asock);
-//        }
+        printf("client connected\n");
+        printf("forking...\n");
+        accept_fork(asock);
     }
     return (0);
 }
