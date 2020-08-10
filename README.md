@@ -3,6 +3,14 @@ Using a remote shell to demo termimnal app Github projects for those interested 
 
 The shell used in the browser makes use of the XTermJS library while the remote shell that hosts the terminal project is a rework of my old 42 Minishell project
 
+## Quickstart
+You can instantly get the project running by running
+```
+python3 run.py
+```
+at the root of the project. The default password is `apples123`.<br>
+Ideally, read the below to get a better idea how how to use this project before doing this :).
+
 ## Getting Start Locally
 Navigate to `Server/`.
 Before initializing the local servers for each of your projects, you'll have to configure the `config.json` file with your projects specs in the following JSON format 
@@ -38,7 +46,7 @@ python3 app.py
 And visit the URL.
 <img src="Client/screenshots/setupscreen.png" />
 
-On your first ever visit (with a clean database of course) you'll be greeted with this page.
+The password can be found in the `validate.json` file (it's default is `apples123`)<br><br> On your first ever visit (with a clean database of course) you'll be greeted with this page.
 All you need to do is upload the same `config.json` file you created in the previous step and that's it. Your projects will appear as a list on the next page.
 <img src="Client/screenshots/ilsting.png"/>
 Click on "View" project and try it out.
