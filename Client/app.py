@@ -212,7 +212,7 @@ def delete_all():
 		db.session.delete(project)
 		db.session.commit()
 
-delete_all()
+
 if __name__ == '__main__':
 	app.run()
 
