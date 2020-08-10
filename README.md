@@ -69,7 +69,7 @@ Run Ngrok the same way you normally would and share the URL with whoever you're 
 - I think that's about it. Cheers
 
 ## Important
-This project is intended to create an Ngrok based solution to showing off terminal apps in the same way one would demo their website. It's important that should you wish to add some projects to be usable for public purposes (demos, hackathons, CV links etc), it's advised that you host the `Server` in a secure cloud virtual machine or Docker container. Th
+This project is intended to create an Ngrok based solution to showing off terminal apps in the same way one would demo their website. It's important that should you wish to add some projects to be usable for public purposes (demos, hackathons, CV links etc), it's advised that you host the `Server` in a secure cloud virtual machine or Docker container. The built-in shell for interacting with projects is relatively minimal but safety first is advised for the possiblity multiple users.
 
 ### AlysonBee
 
