@@ -71,7 +71,7 @@ and then
 ```
 ngrok http 5000
 ```
-And you know the rest. If not, check out <a href="https://ngrok.com/">Ngrok</a> and see why it's awesome.
+And you know the rest. If not, check out <a href="https://ngrok.com/" target="_blank">Ngrok</a> and see why it's awesome.
 
 ## Next Steps
 - The shell hosted locally is completely insecure and needs to be extensively customized to prevent users from having remote access to your entire filesystem. This is just a demo.
