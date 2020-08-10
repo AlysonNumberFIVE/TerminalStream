@@ -7,8 +7,10 @@ from flask import jsonify
 from flask import Flask
 from flask import request
 from flask import redirect
+from flask_wtf import FlaskForm
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from wtforms import SubmitField
 
 from python_version import GoldiloxAPIClientConnection
 
@@ -29,6 +31,11 @@ app.config.from_object(Config)
 app.config['UPLOAD_FOLDER'] = os.path.join(basedir, 'upload')
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+
+
+class SendButton(FlaskForm):
+	"""Login Form and whatever."""
+	button = SubmitField('SIGN UP')
 
 
 class Project(db.Model):
@@ -56,8 +63,6 @@ def new():
 	return jsonify({'value': ret})
 
 
-
-
 def handle_config(content: str):
 	global url
 
@@ -76,6 +81,7 @@ def handle_config(content: str):
 			db.session.add(project)
 			db.session.commit()
 		count += 1
+
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
@@ -111,6 +117,7 @@ def check_socket_object(SocketList: list, port: int):
 			APIsocket = Socket['socket']
 			return True
 	return False
+
 
 @app.route('/tryitout/<project_name>')
 def tryitout(project_name: str):
@@ -150,6 +157,12 @@ def test():
 
 	return render_template('msgboard.html',
 							projects=all_projects)
+
+
+@app.route('/login')
+def login():
+	submit = SendButton()
+	return render_template('login.html', button=submit)
 
 
 def delete_all():
