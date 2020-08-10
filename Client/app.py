@@ -1,5 +1,7 @@
 import os
 import json
+import sys
+import signal
 
 from flask import url_for
 from flask import render_template
@@ -32,10 +34,10 @@ app.config['SECRET_KEY'] = 'ISUPPOSE'
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-
 class SendButton(FlaskForm):
 	"""Login Form and whatever."""
 	button = SubmitField('CHANGE CONFIG')
+
 
 
 class Project(db.Model):
@@ -45,6 +47,17 @@ class Project(db.Model):
 	project_name = db.Column(db.String(4986))
 	github_link = db.Column(db.String(12096))
 	author = db.Column(db.String(4096))
+
+
+
+
+def kill_server(first, second):
+	string = os.path.join(os.getcwd(), "..", "Server")
+	os.chdir(string)
+	os.system("python3 init.py deactivate")
+	sys.exit(1)
+
+signal.signal(signal.SIGINT, kill_server)
 
 
 @app.route('/check', methods=['GET', 'POST'])
@@ -180,7 +193,6 @@ def validate_user(submitted:str):
 		return False
 	content = json.loads(value)
 	psswd = content['password']
-	print('passwd ', psswd)
 	if submitted == psswd:
 		return True
 	return False
@@ -194,7 +206,6 @@ def login():
 	error = False
 	if submit.validate_on_submit():
 		password = request.form['password']
-		print('password is ', password)	
 		if validate_user(password) is True:
 			flag = True
 			return redirect(url_for('setup'))
@@ -212,7 +223,7 @@ def delete_all():
 		db.session.delete(project)
 		db.session.commit()
 
-
+delete_all()
 if __name__ == '__main__':
 	app.run()
 
