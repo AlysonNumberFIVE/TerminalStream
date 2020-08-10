@@ -123,7 +123,6 @@ int     main(int argc, char **argv)
     servfd = InitServer(atoi(argv[1]), 5, &server_address);
     while (true)
     {
-        pid_t sid;
         asock = HandshakeAccept(servfd, server_address);
         accept_fork(asock);
     }
