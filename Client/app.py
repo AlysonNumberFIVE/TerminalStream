@@ -15,27 +15,27 @@ from wtforms import SubmitField
 from python_version import GoldiloxAPIClientConnection
 
 APIsocket = None
-
 SocketList = list()
+flag = False
 
 app = Flask(__name__)
 url = '127.0.0.1'
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-#APIsocket = GoldiloxAPIClientConnection('127.0.0.1', 4242)
 class Config(object):
 	SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
 	SQLALCHEMY_TRACK_MODIFICATION = False
 
 app.config.from_object(Config)
 app.config['UPLOAD_FOLDER'] = os.path.join(basedir, 'upload')
+app.config['SECRET_KEY'] = 'ISUPPOSE'
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 
 class SendButton(FlaskForm):
 	"""Login Form and whatever."""
-	button = SubmitField('SIGN UP')
+	button = SubmitField('CHANGE CONFIG')
 
 
 class Project(db.Model):
@@ -47,15 +47,9 @@ class Project(db.Model):
 	author = db.Column(db.String(4096))
 
 
-def is_connected():
-	global APIsocket
-	if APIsocket is not None:
-		APIsocket.Close()
-		APIsocket = None
-
-
 @app.route('/check', methods=['GET', 'POST'])
 def new():
+	"""The route that's hit when a terminal command is sent."""
 	values = request.get_data().decode('utf-8').split('=')
 	to_send = values[1].replace('%20', ' ').replace('%2F', '/')
 	APIsocket.Send(to_send)
@@ -64,6 +58,10 @@ def new():
 
 
 def handle_config(content: str):
+	"""Handle the creation of projects to display.
+
+	:content: The JSON payload with the project info.
+	"""
 	global url
 
 	count = 0
@@ -85,7 +83,7 @@ def handle_config(content: str):
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
-
+	"""Handle the uploading of config files."""
 	if request.method == 'POST':
 		f = request.files['file']
 		f.save(os.path.join(app.config['UPLOAD_FOLDER'], f.filename))
@@ -95,10 +93,12 @@ def upload():
 		print(content)
 		handle_config(content)
 		return redirect(url_for('test'))
-
+	
 
 @app.route('/setup')
 def setup():
+	if flag is False:
+		return redirect(url_for('login'))
 #	is_connected()
 	allprojects = Project.query.all()
 
@@ -110,6 +110,12 @@ def setup():
 
 
 def check_socket_object(SocketList: list, port: int):
+	"""Check if the port named is currently open.
+
+	:SocketList: The list of all the connected projects.
+	:port: The port number to verify and establish a
+		connection against.
+	"""
 	global APIsocket
 
 	for Socket in SocketList:
@@ -121,12 +127,15 @@ def check_socket_object(SocketList: list, port: int):
 
 @app.route('/tryitout/<project_name>')
 def tryitout(project_name: str):
+	"""Endpoint for tryign out a project.
+	
+	:param: The name of the project.
+	"""
 	projects = Project.query.all()
 	found = None
 	global APIsocket
 	global SocketList
 
-	print('success')
 	for project in projects:
 		if project.project_name == project_name:
 			found = project
@@ -143,13 +152,12 @@ def tryitout(project_name: str):
 			'port': found.port
 		}
 		SocketList.append(socket_object)
-		print('APISocket')
 	return render_template('review.html', project=found) 
 
 
 @app.route('/', methods=['GET', 'POST'])
 def test():
-#	is_connected()
+	"""The list of all projects currently on display."""
 	all_projects = Project.query.all()
 
 	if len(all_projects) == 0:
@@ -159,18 +167,50 @@ def test():
 							projects=all_projects)
 
 
-@app.route('/login')
+def validate_user(submitted:str):
+	"""Temporary workaround for validating a password.
+
+	:submitted: The password submitted by the user.
+	:return: True if the password is correct and
+		False otherwise.
+	"""
+	try:
+		value = open('validate.json').read()
+	except FileNotFoundError:
+		return False
+	content = json.loads(value)
+	psswd = content['password']
+	print('passwd ', psswd)
+	if submitted == psswd:
+		return True
+	return False
+
+
+@app.route('/login', methods=['GET', 'POST'])
 def login():
+	"""The permission page to verify that user can upload config."""
 	submit = SendButton()
-	return render_template('login.html', button=submit)
+	global flag
+	error = False
+	if submit.validate_on_submit():
+		password = request.form['password']
+		print('password is ', password)	
+		if validate_user(password) is True:
+			flag = True
+			return redirect(url_for('setup'))
+		error = True
+	return render_template('login.html',
+		button=submit,
+		error=error
+	)
 
 
 def delete_all():
+	"""Clear all projects."""
 	allprojects = Project.query.all()
 	for project in allprojects:
 		db.session.delete(project)
 		db.session.commit()
-	print("deleted")
 
 
 if __name__ == '__main__':

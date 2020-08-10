@@ -229,6 +229,9 @@
                             <li class="nav-item active">
                                 <a class="nav-link" href="{{ url_for('test') }}">Message Board</a>
                             </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="{{ url_for('setup') }}">Create New Config</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -248,7 +251,7 @@
                     <asciinema-player src="{{ url_for('static', filename='bigquery.rec') }}"></asciinema-player>
                     <br>
                     -->
-                    <a href="{{ url_for('tryitout', project_name=project.project_name) }}" class="btn btn-primary">
+                    <a href="{{ url_for('tryitout', project_name=project.project_name) }}" class="btn btn-primary ">
                     View Project</a>
                   </div>
               </div><br><br>
