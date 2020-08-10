@@ -1,7 +1,9 @@
 # TerminalStream
-Using a remote shell to demo termimnal app Github projects for those interested in showing off their work (sort of the same way ngrok allows for website demos without the user having to clone the server or run it locally).
+This project is intended to create an Ngrok based solution to showing off terminal apps in the same way one would demo their website projects with Ngrok or any other tunneling app/service.<br>
 
-The shell used in the browser makes use of the XTermJS library while the remote shell that hosts the terminal project is a rework of my old 42 Minishell project
+The shell used in the browser makes use of the XTermJS library while the remote shell that hosts the terminal project is a rework of my old 42 Minishell project.
+
+Only static apps (with simple input/output) are handled. Support for projects that make use of `ncurses` or have their own enviroments (like shells or docker projects) are for future releases--if pulling that off is even possible. 
 
 ## Quickstart
 You can instantly get the project running by running
@@ -58,10 +60,16 @@ python3 init.py deactivate
 ```
 on your local machine. This will kill the daemon processes showing off your project. Coz open ports is bad hygene and we must always always always wash our hands after handshakes :).
 
+## Using the project alonside Ngrok
+Run Ngrok the same way you normally would and share the URL with whoever you're showing your project to and they can give it a go straight from the website.
+
 ## Next Steps
 - The shell hosted locally is completely insecure and needs to be extensively customized to prevent users from having remote access to your entire filesystem. This is just a demo.
 - The website needs a lot of work (a looooooot of work). It's recycled from an old version but this functionality is relatively okay.
 - I think that's about it. Cheers
+
+## Important
+This project is intended to create an Ngrok based solution to showing off terminal apps in the same way one would demo their website. It's important that should you wish to add some projects to be usable for public purposes (demos, hackathons, CV links etc), it's advised that you host the `Server` in a secure cloud virtual machine or Docker container. Th
 
 ### AlysonBee
 
