@@ -6,7 +6,7 @@ network_lib = network.a
 netlib = $(addprefix $(network), $(network_lib))
 
 
-shell = shell/
+shell = shell2/
 shell_lib = shell.a
 
 shelllib = $(addprefix $(shell), $(shell_lib))
