@@ -98,14 +98,17 @@ def handle_config(content: str):
 def upload():
 	"""Handle the uploading of config files."""
 	if request.method == 'POST':
-		f = request.files['file']
-		f.save(os.path.join(app.config['UPLOAD_FOLDER'], f.filename))
-		content = open(
-			os.path.join(app.config['UPLOAD_FOLDER'], f.filename)
-		).read()
-		print(content)
-		handle_config(content)
-		return redirect(url_for('test'))
+		try:
+			f = request.files['file']
+			f.save(os.path.join(app.config['UPLOAD_FOLDER'], f.filename))
+			content = open(
+				os.path.join(app.config['UPLOAD_FOLDER'], f.filename)
+			).read()
+			print(content)
+			handle_config(content)
+			return redirect(url_for('test'))
+		except:
+			return redirect(url_for('setup'))
 	
 
 @app.route('/setup')
