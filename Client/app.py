@@ -110,11 +110,13 @@ def upload():
 
 @app.route('/setup')
 def setup():
+	global flag
 	if flag is False:
 		return redirect(url_for('login'))
 #	is_connected()
 	allprojects = Project.query.all()
 
+	flag = False
 	if len(allprojects):
 		for project in allprojects:
 			db.session.delete(project)
