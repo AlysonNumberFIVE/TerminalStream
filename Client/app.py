@@ -47,6 +47,7 @@ class Project(db.Model):
 	project_name = db.Column(db.String(4986))
 	github_link = db.Column(db.String(12096))
 	author = db.Column(db.String(4096))
+	description = db.Column(db.String(12096))
 
 
 
@@ -77,17 +78,30 @@ def handle_config(content: str):
 	"""
 	global url
 
+	description
 	count = 0
 	json_content = json.loads(content)
 	url = json_content['url']
 	author = json_content['author']
+
 	for k, v in json_content.items():
 		if count > 1:
+	
+			try:
+				author = json_content[k]['author']
+			except:
+				author = json_content['author'] 
+			
+			try:
+				description = json_content[k]['description']
+			except:
+				description = ""
 			project = Project(
 				port = int(json_content[k]['port']),
 				project_name = k,
 				github_link = json_content[k]['link'],
-				author = author
+				author = author,
+				description = description
 			)
 			db.session.add(project)
 			db.session.commit()

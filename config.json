@@ -3,10 +3,18 @@
 	"author": "AlysonBee",
 	"Bigquery_Schema_Autogen": {
 	    "link": "https://github.com/AlysonBee/Python_BigQuery_Schema_Autogen",
-	    "port": 4242
+	    "port": 4242,
+	    "description": "A schema generator for BigQuery JSON files."
 	},
 	"OSX_Packer": {
 	    "link": "https://github.com/AlysonBee/OSX_Packer",
-	    "port": 5555
+	    "port": 5555,
+	    "description": "A small demmonstration on OSX binary packing"
+	},
+	"ROPgadget": {
+		"link": "https://github.com/JonathanSalwan/ROPgadget",
+		"port": 3333,
+		"description": "This tool lets you search your gadgets on your binaries to facilitate your ROP exploitation.",
+		"author": "JonathanSalwan"
 	}
 }
