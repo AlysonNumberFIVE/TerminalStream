@@ -6,7 +6,7 @@ network_lib = network.a
 netlib = $(addprefix $(network), $(network_lib))
 
 
-shell = shell2/
+shell = secure/
 shell_lib = shell.a
 
 shelllib = $(addprefix $(shell), $(shell_lib))

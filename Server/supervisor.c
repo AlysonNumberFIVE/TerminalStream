@@ -4,6 +4,8 @@
 #include "stable_network/c_version.h"
 #include "supervisor.h"
 
+char    root[1024];
+
 char    *create_filename(int socket)
 {
     char *filename = strdup(".hiddenX");
@@ -37,7 +39,8 @@ void    accept_fork(int socket)
     char        **env;
     int         output;
     int         error;
-    
+
+   
     env = init();
     filename = create_filename(socket);
     while (true)
@@ -102,6 +105,7 @@ void    switch_directory(char *project_name)
     temp = join(pathway, project_name);
     free(pathway);
     chdir(temp);
+    getcwd(root, 1024);
     printf(": %s\n", temp);
     free(temp);
 }
@@ -113,6 +117,7 @@ int     main(int argc, char **argv)
     int                  asock;
     pid_t                pid;
 
+    bzero(root, 1024);
     if (argc != 3)
     {
         printf("Usage : %s [port number] [project name]\n", argv[0]);
