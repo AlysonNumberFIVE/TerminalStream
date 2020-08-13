@@ -295,6 +295,9 @@
 
         function forbidden(x) {
             onlyfan = ["ls", "pwd", "cat", "clear"]
+            {% if projects.run_command %}
+                onlyfan.push(projects.run_command);
+            {% endif %}
             bad_second = ["~", "/"]
             segments = x.split(" ");
             if (!onlyfan.includes(segments[0])) {
