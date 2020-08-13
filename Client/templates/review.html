@@ -240,19 +240,19 @@
                         </ul>
                     </div>
             </nav>
-            <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='asciinema-player.css') }}" />
- 
+        
             <div class="container">
                 <h3>{{ project.name }}</h3>
-                <p>Converts a JSON string to a basic BigQuery Python Schema.</p>
                 <a href="{{ project.github_link }}"  target="_blank class="btn btn-link">{{ project.github_link }}</a>
                 <p>Preview:</p><br>
                              
                 <div class="iframe-loading-image">
                         <div id="terminal"></div>
                 </div><br>
-                <h2>Description:</h2>
-                <p>Scans a URL and/or file for possible viruses/malware and sends an email report upon completion.</p>
+                {% if project.description != None %}
+                    <h2>Description:</h2>
+                    <p>{{ project.description }}</p>
+                {% endif %}
                 <!--
                 <img src="images.png" width="600" height="400"/>
                 -->
@@ -273,6 +273,7 @@
     <script>
         var response = "";
         var history = 0;
+        var x42 = false;
 
         function print_output(response, term) {
             if (response.includes('\n') == true)
@@ -290,6 +291,39 @@
                 term.write("\r\n"+response);
             }
         }
+        // Checking for forbidden functions.]
+
+        function forbidden(x) {
+            onlyfan = ["ls", "pwd", "cat", "clear"]
+            bad_second = ["~", "/"]
+            segments = x.split(" ");
+            if (!onlyfan.includes(segments[0])) {
+                return false;
+            }
+            if (segments.length == 2) {
+                if (segments[0] == "ls") {
+                    if (segments[1][0] == '~' || segments[1][0] == '/' || segments[1][0] == '-')
+                        return false;
+                    if (segments[1].includes('..')) 
+                        return false;
+                }
+                else if (segments[0] == "cat" && segments.length == 2) {
+                    if (segments[1][0] == '~' || segments[1][0] == '/')
+                        return false;
+                    if (segments[1].includes('..')) 
+                        return false
+                }
+            }
+            else if (segments.length > 2) {
+                return false;
+            }
+            else {
+                if (x == "cat")
+                    return false;
+                else
+                    return true;
+            }
+        }
 
         function shell_control(x, term) {
             var buffer = {};
@@ -302,6 +336,7 @@
                 success: function(data) {
                     console.log('>> ',data)
                     buffer = data;
+                
                     if (buffer["value"].length > 0)
                     {
                         response = buffer["value"].replace(/\u21B5/g,'\n');
@@ -336,12 +371,17 @@
         term.on("key", function(key, ev) {
             
             if (ev.keyCode == 13) {
-                if (curr_line.length > 1)
+                if (forbidden(curr_line) == false)
+                {
+                    term.write("\r\nIllegal Command");
+                    term.write("\r\nweb shell $");
+                }
+                else if (curr_line.length > 1)
                 {
                     entries.push(curr_line);
                     shell_control(curr_line, term);
                 }
-                else 
+                else
                     term.write('\r\nweb shell $ ');
                 curr_line = ""
                 response = "";

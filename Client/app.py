@@ -78,12 +78,11 @@ def handle_config(content: str):
 	"""
 	global url
 
-	description
+	description = ""
 	count = 0
 	json_content = json.loads(content)
 	url = json_content['url']
 	author = json_content['author']
-
 	for k, v in json_content.items():
 		if count > 1:
 	
@@ -96,6 +95,7 @@ def handle_config(content: str):
 				description = json_content[k]['description']
 			except:
 				description = ""
+			print('description is ', description)
 			project = Project(
 				port = int(json_content[k]['port']),
 				project_name = k,
@@ -121,7 +121,8 @@ def upload():
 			print(content)
 			handle_config(content)
 			return redirect(url_for('test'))
-		except:
+		except Exception as e:
+			print('>> ', e)
 			return redirect(url_for('setup'))
 	
 

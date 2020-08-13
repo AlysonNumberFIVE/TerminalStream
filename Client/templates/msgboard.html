@@ -243,14 +243,10 @@
                 <div class="card w-75">
                   <div class="card-body">
                     <h5 class="card-title">{{ project.project_name }}</h5>
-                    <p>2019/06/14</p>
+                    
                     <img style='float:right;padding-bottom:2px;margin-top:-10px;'src="{{ url_for('static', filename='MyFacePic.jpeg') }}" height="50" width="50"/>
-                    <p>Project by <a href="#">{{ project.author }}</a></p>
-                    <p class="card-text">II coded a Python BigQuery schema generator to turn JSON files in BigQuery python objects.</p>
-                    <!--
-                    <asciinema-player src="{{ url_for('static', filename='bigquery.rec') }}"></asciinema-player>
-                    <br>
-                    -->
+                    <p>Project by {{ project.author }}</p>
+                    <p class="card-text"></p>
                     <a href="{{ url_for('tryitout', project_name=project.project_name) }}" class="btn btn-primary ">
                     View Project</a>
                   </div>
