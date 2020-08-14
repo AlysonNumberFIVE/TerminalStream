@@ -76,8 +76,8 @@ ngrok http 5000
 And you know the rest. If not, check out <a href="https://ngrok.com/" target="_blank">Ngrok</a> and see why it's awesome.
 
 ## Next Steps
-- The shell hosted locally is completely insecure and needs to be extensively customized to prevent users from having remote access to your entire filesystem. This is just a demo.
-- The website needs a lot of work (a looooooot of work). It's recycled from an old version but this functionality is relatively okay.
+- I don't know how to make anything other than static terminal apps work (things like shells and docker stuff doesn't work). I don't know if it's possible to expand on this though so I might end it here.
+- More stuff to `config.json` files I think.
 - I think that's about it. Cheers
 
 ## Important
