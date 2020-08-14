@@ -222,7 +222,7 @@
 
                     <button type="button" id="sidebarCollapse" class="btn btn-info">
                         <i class="fas fa-align-left"></i>
-                        <span>User Profile</span>
+                        <span>Credits</span>
                     </button>
                     <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fas fa-align-justify"></i>
@@ -275,6 +275,37 @@
         var history = 0;
         var x42 = false;
 
+        function args_controller(string) {
+            var not_allowed = ["/", "~"];
+            var allowed_comm = ["ls", "pwd", "clear"];
+            var special_mentions = ["python3", "python", "make", "cat", "nm", "otool"]
+            var values = string.split(" ");
+            var forbid = 1;
+
+            for (forbid = 1; forbid < values.length; forbid++) {
+                if (values[forbid][0] != '-') {
+                    if (not_allowed.includes(values[forbid][0])) {
+                        return false;
+                    }
+                    if (values[forbid].includes("..")) {
+                        return false;
+                    }
+                }
+            }
+
+            if (!special_mentions.includes(values[0]) &&
+                !allowed_comm.includes(values[0]) &&
+                !values[0].startsWith("./")) {
+                return false;
+            }
+
+            if (special_mentions.includes(values[0]) && values.length == 1) {
+                return false;
+            }
+
+            return true;
+        }
+
         function print_output(response, term) {
             if (response.includes('\n') == true)
             {
@@ -292,41 +323,6 @@
             }
         }
         // Checking for forbidden functions.]
-
-        function forbidden(x) {
-            onlyfan = ["ls", "pwd", "cat", "clear"]
-            {% if projects.run_command %}
-                onlyfan.push(projects.run_command);
-            {% endif %}
-            bad_second = ["~", "/"]
-            segments = x.split(" ");
-            if (!onlyfan.includes(segments[0])) {
-                return false;
-            }
-            if (segments.length == 2) {
-                if (segments[0] == "ls") {
-                    if (segments[1][0] == '~' || segments[1][0] == '/' || segments[1][0] == '-')
-                        return false;
-                    if (segments[1].includes('..')) 
-                        return false;
-                }
-                else if (segments[0] == "cat" && segments.length == 2) {
-                    if (segments[1][0] == '~' || segments[1][0] == '/')
-                        return false;
-                    if (segments[1].includes('..')) 
-                        return false
-                }
-            }
-            else if (segments.length > 2) {
-                return false;
-            }
-            else {
-                if (x == "cat")
-                    return false;
-                else
-                    return true;
-            }
-        }
 
         function shell_control(x, term) {
             var buffer = {};
@@ -354,7 +350,6 @@
         
         }
     
-
         var term = new Terminal({
             cursorBlink: "block"
         });
@@ -374,10 +369,10 @@
         term.on("key", function(key, ev) {
             
             if (ev.keyCode == 13) {
-                if (forbidden(curr_line) == false)
+                if (args_controller(curr_line) == false)
                 {
                     term.write("\r\nIllegal Command");
-                    term.write("\r\nweb shell $");
+                    term.write("\r\nweb shell $ ");
                 }
                 else if (curr_line.length > 1)
                 {

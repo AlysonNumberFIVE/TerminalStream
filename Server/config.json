@@ -3,7 +3,7 @@
 	"author": "AlysonBee",
 	"Bigquery_Schema_Autogen": {
 	    "link": "https://github.com/AlysonBee/Python_BigQuery_Schema_Autogen",
-	    "port": 4242,
+	    "port": 4444,
 	    "description": "A schema generator for BigQuery JSON files."
 	},
 	"OSX_Packer": {

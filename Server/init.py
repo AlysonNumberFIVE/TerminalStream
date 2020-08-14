@@ -23,8 +23,8 @@ if len(sys.argv) == 2 and sys.argv[1] == 'activate':
 	for k, v in json_content.items():
 		if count > 1:
 			os.system(f"git clone {json_content[k]['link']} projects/{k}")
-			os.system(f'cp server projects/{k}')
-			os.system(f"./projects/{k}/server {json_content[k]['port']} {k}")
+			os.system(f'cp .server projects/{k}')
+			os.system(f"./projects/{k}/.server {json_content[k]['port']} {k}")
 		count += 1
 
 elif len(sys.argv) == 2 and sys.argv[1] == 'deactivate':
@@ -37,7 +37,7 @@ elif len(sys.argv) == 2 and sys.argv[1] == 'deactivate':
 			out, err = proc.communicate()
 			os.system(system_string)
 			for line in out.splitlines():
-				if f"./projects/{k}/server" in str(line):
+				if f"./projects/{k}/.server" in str(line):
 					pid = int(line.split(None, 1)[0])
 					os.kill(pid, signal.SIGKILL)
 

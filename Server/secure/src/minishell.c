@@ -149,7 +149,6 @@ void    shell(char **env, char *buffer)
             ft_pwd(root);
         else
         {
-            printf("here insteand\n");
             ft_system(env, buffer); 
         }
 }

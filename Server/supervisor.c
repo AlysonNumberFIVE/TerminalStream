@@ -129,6 +129,8 @@ int     main(int argc, char **argv)
     while (true)
     {
         asock = HandshakeAccept(servfd, server_address);
+        printf("connected...\n");
+
         accept_fork(asock);
     }
     return (0);

@@ -13,7 +13,8 @@ bool    assert_api_connection(int sockfd)
     if (strcmp(response_message, "API") != 0)
     {
         close(sockfd);
-        printf("Error, incorrect node");
+        printf("Error, incorrect node\n");
+        exit(1);
         return (false);
     }
     send(sockfd, "API_0K\0", 7, 0);

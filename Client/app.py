@@ -48,9 +48,6 @@ class Project(db.Model):
 	github_link = db.Column(db.String(12096))
 	author = db.Column(db.String(4096))
 	description = db.Column(db.String(12096))
-	run_command = db.Column(db.String(12097))
-
-
 
 
 def kill_server(first, second):
@@ -102,8 +99,7 @@ def handle_config(content: str):
 				project_name = k,
 				github_link = json_content[k]['link'],
 				author = author,
-				description = description,
-				run_command = json_content[k]['run_command']
+				description = description
 			)
 			db.session.add(project)
 			db.session.commit()

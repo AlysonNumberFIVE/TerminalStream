@@ -20,7 +20,7 @@ libft = $(addprefix $(shell), $(ft))
 server:
 	make lib -C $(network)
 	make -C $(shell)
-	gcc -o server supervisor.c $(shelllib) $(netlib) $(alylib) $(libft)
+	gcc -o .server supervisor.c $(shelllib) $(netlib) $(alylib) $(libft)
 
 clean:
 	make clean -C $(network)
@@ -29,6 +29,6 @@ clean:
 fclean:
 	make fclean -C $(network)
 	make fclean -C $(shell)
-	rm -f server
+	rm -f .server
 
 re: fclean server

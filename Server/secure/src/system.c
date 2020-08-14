@@ -72,7 +72,6 @@ void        scan_path(char **env, char **segments)
         key_value = ft_strsplit(env[i], '=');
         if (strcmp(key_value[0], "PATH") == 0)
         {
-            printf("here weare %s\n", env[i]);
             pathway = strdup(key_value[1]);
             free2d(key_value);
             break;
