@@ -357,7 +357,7 @@
         var curr_line = ""
         var entries = []
         term.open(document.getElementById("terminal"));
-    
+        term.write("Command List:\r\nls - list directory content\r\nclear - clear screen\r\npython3/python [program] - No, you can't open a python shell\r\nmake - for projects with Makefiles\r\ncat [file] - see file contents\r\nnm - look at binary symbols\r\notool - [OSX only] dump binary memory info\r\n\r\n");
         term.write("web shell $ ");
         term.prompt = () => {
             if (curr_line) {
