@@ -275,8 +275,10 @@
         var history = 0;
         var x42 = false;
 
+        function count
+
         function args_controller(string) {
-            var not_allowed = ["/", "~"];
+            var not_allowed = ["/", "~", "|", ">", "<", "&"];
             var allowed_comm = ["ls", "pwd", "clear"];
             var special_mentions = ["python3", "python", "make", "cat", "nm", "otool"]
             var values = string.split(" ");
