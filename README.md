@@ -78,6 +78,7 @@ And you know the rest. If not, check out <a href="https://ngrok.com/" target="_b
 ## Next Steps
 - I don't know how to make anything other than static terminal apps work (things like shells and docker stuff doesn't work). I don't know if it's possible to expand on this though so I might end it here.
 - More stuff to `config.json` files I think.
+- Fixing bugs and stuff.
 - I think that's about it. Cheers
 
 ## Important
