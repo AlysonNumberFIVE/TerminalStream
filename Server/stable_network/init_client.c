@@ -23,6 +23,7 @@ int     GoldiloxAPIClientConnection(char *host, int port)
 {
     int     sockfd;
     struct sockaddr_in socket_address;
+    int enable;
 
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if (sockfd < 0)
@@ -30,6 +31,9 @@ int     GoldiloxAPIClientConnection(char *host, int port)
         perror("socket");
         return (-1);
     }
+    enable = 1;
+    if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &enable, sizeof(int)) < 0)
+        perror("setsockopt(SO_REUSEADDR) failed");
     memset(&socket_address, '\0', sizeof(socket_address));
     socket_address.sin_family = AF_INET;
     socket_address.sin_addr.s_addr = inet_addr(host);

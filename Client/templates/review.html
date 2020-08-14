@@ -275,7 +275,6 @@
         var history = 0;
         var x42 = false;
 
-        function count
 
         function args_controller(string) {
             var not_allowed = ["/", "~", "|", ">", "<", "&"];
@@ -283,13 +282,18 @@
             var special_mentions = ["python3", "python", "make", "cat", "nm", "otool"]
             var values = string.split(" ");
             var forbid = 1;
-
+            console.log('values 1 is ', values[1])
             for (forbid = 1; forbid < values.length; forbid++) {
                 if (values[forbid][0] != '-') {
                     if (not_allowed.includes(values[forbid][0])) {
                         return false;
                     }
-                    if (values[forbid].includes("..")) {
+                    if (values[forbid].includes("..") ||
+                        values[forbid].includes('|') ||
+                        values[forbid].includes('>') ||
+                        values[forbid].includes('<') ||
+                        values[forbid].includes('&')) {
+                        console.log('FAIL')
                         return false;
                     }
                 }
@@ -371,7 +375,7 @@
         term.on("key", function(key, ev) {
             
             if (ev.keyCode == 13) {
-                if (args_controller(curr_line) == false)
+                if (curr_line.length > 1 && args_controller(curr_line) == false)
                 {
                     term.write("\r\nIllegal Command");
                     term.write("\r\nweb shell $ ");
