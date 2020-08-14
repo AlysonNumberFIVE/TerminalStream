@@ -18,17 +18,19 @@ Navigate to `Server/`.
 Before initializing the local servers for each of your projects, you'll have to configure the `config.json` file with your projects specs in the following JSON format 
 ```
 {
-	"url": "127.0.0.1", # The address of the webserver that users will be able to visit to try your stuff
-	"author": "AlysonBee", # The owner of the targeted repo
-	"Bigquery_Schema_Autogen": { # the first project URL and the port you want to expose for it
+	"url": "127.0.0.1",
+	"author": "AlysonBee",
+	"Bigquery_Schema_Autogen": {
 	    "link": "https://github.com/AlysonBee/Python_BigQuery_Schema_Autogen",
-	    "port": 4242
+	    "port": 4444,
+	    "description": "A schema generator for BigQuery JSON files."
 	},
-	"OSX_Packer": { # the second project URL and the port to expose for it
+	"OSX_Packer": {
 	    "link": "https://github.com/AlysonBee/OSX_Packer",
-	    "port": 5555
-	}
-  ...
+	    "port": 5555,
+	    "description": "A small demmonstration on OSX binary packing"
+	},
+	...
 }
 ```
 You can add as many projects as you want with the key being the name of the project with its values following the same paradigm as shown above.
