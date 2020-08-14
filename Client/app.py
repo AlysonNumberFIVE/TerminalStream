@@ -106,12 +106,21 @@ def handle_config(content: str):
 		count += 1
 
 
+def validate_filename(filename: str) -> bool:
+	"""validate filename as secure_filename isn't running."""
+
+	if filename.endswith('.sh') or '..' in filename:
+		return False
+	return True
+
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
 	"""Handle the uploading of config files."""
 	if request.method == 'POST':
 		try:
 			f = request.files['file']
+			if validate_filename(f.filename) is False:
+				return redirect(url_for('setup'))
 			f.save(os.path.join(app.config['UPLOAD_FOLDER'], f.filename))
 			content = open(
 				os.path.join(app.config['UPLOAD_FOLDER'], f.filename)
